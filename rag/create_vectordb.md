@@ -52,3 +52,18 @@ The structure of the params HashMap
 "action": (String) must be supported actions. Supported: `create_table_from_arrow`; `load_table`; `add_arrow_to_table`
 
 "kwargs": another HashMap to pass the arguments to action function.
+
+Set path to database (String)
+kwargs.put("database_path", "/path/to/database");
+
+Set the table name (String)
+kwargs.put("table_name", "your_table_name");
+
+Set path to input arrow file (String)
+kwargs.put("arrow_file", "/path/to/arrow_file");
+
+Assign value (String) for `source_column`.
+kwargs.put("source_column", "text");
+
+Set the language (String), support `vi` and `en`
+kwargs.put("language", "vi");

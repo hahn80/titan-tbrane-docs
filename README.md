@@ -1,4 +1,4 @@
-# Documentations for Titan-TBrane
+# Documentation for TBrane
 
 
 This service heavily depends on the GPU tasks from pytorch and CUDA libs.
