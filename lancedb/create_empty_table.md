@@ -35,7 +35,14 @@ public class CreateEmptyTable {
             kwargs.put("table_name", "test");
             kwargs.put("source_column", "text");
             kwargs.put("mode", "overwrite");
-            kwargs.put("model_name_or_path", "/data/TitanProjects/dev/tbrane/bge-base-en-v1.5");
+            //kwargs.put("model_name_or_path", "/data/TitanProjects/dev/tbrane/bge-base-en-v1.5");
+			
+			kwargs.put("model_name_or_path", "M2V_base_output");
+			
+			// If you load model2vec with static distil model
+			// you have to set `is_distill` to be true
+			// otherwise you will get error!
+            kwargs.put("is_distill", true);
             
             Map<String, String> schema = new HashMap<>();
 
