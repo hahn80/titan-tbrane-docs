@@ -9,4 +9,5 @@ This folder contains functions that can be used to work with vector database.
 5. Delete some row from a [table](./delete_rows_from_table.md).
 6. Create index for a large [table](./create_index.md).
 7. Query information from a [table](./query_table.md).
+8. Optimize a  [table](./optimize_table.md) by merging the data and remove the old ones.
 
