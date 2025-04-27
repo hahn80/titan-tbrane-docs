@@ -27,22 +27,20 @@ public class CreateEmptyTable {
         // Use try-with-resources to ensure proper resource management
         try (PythonInterpreter interpreter = new PythonInterpreter(config)) {
             // Import Python worker function
-            interpreter.exec("from titan.tbrane.services import worker");
+            interpreter.exec("from titan.tbrane.services import tbrane_worker");
+           
             
             // Create the HashMap for kwargs
             HashMap<String, Object> kwargs = new HashMap<>();
             kwargs.put("database_path", "test_db");
             kwargs.put("table_name", "test");
-            kwargs.put("source_column", "text");
+            
+            // new update
+            kwargs.put("vector_column", "vector");
+            kwargs.put("vector_length", 256);
             kwargs.put("mode", "overwrite");
-            //kwargs.put("model_name_or_path", "/data/TitanProjects/dev/tbrane/bge-base-en-v1.5");
-			
-			kwargs.put("model_name_or_path", "M2V_base_output");
-			
-			// If you load model2vec with static distil model
-			// you have to set `is_distill` to be true
-			// otherwise you will get error!
-            kwargs.put("is_distill", true);
+            kwargs.put("exist_ok", true);
+            
             
             Map<String, String> schema = new HashMap<>();
 
@@ -60,10 +58,14 @@ public class CreateEmptyTable {
             params.put("kwargs", kwargs);
             
             
-            Object table_obj = interpreter.invoke("worker", params);
+            Object table_obj = interpreter.invoke("tbrane_worker", params);
+            
+            
             
             // Now you can get access to the object
             System.out.println(table_obj);
+
+            
         } catch (Exception e) {
             e.printStackTrace(); // Print any exceptions
         }
@@ -75,21 +77,18 @@ The structure of the *params* HashMap:
 
 ```JSON
 {
-  "task": "creating",
-  "action": "create_empty_table",
-  "kwargs": {
-    "database_path": "test_db",
-    "table_name": "test",
-    "source_column": "text",
-    "mode": "overwrite",
-    "model_name_or_path": "/data/TitanProjects/dev/tbrane/bge-base-en-v1.5",
-    "schema": {
-      "key": "INT",
-      "text": "STRING",
-      "info": "STRING"
-    }
-  }
-}
+                "task": "creating",
+                "action": "create_empty_table",
+                "kwargs": {
+                    "database_path": database_path,
+                    "table_name": table_name,
+                    "schema": {"key": "INT"},
+                    "vector_length": 256,
+                    "mode": "overwrite",
+                    "exist_ok": True,
+                    "vector_column": "vector",
+                },
+            }
 ```
 
 
@@ -105,14 +104,14 @@ kwargs.put("database_path", "/path/to/database");
 Set the table name (String)
 kwargs.put("table_name", "your_table_name");
 
-Set column name for text field (String)
-kwargs.put("source_column", "text");
+Set column name for vector field (String)
+kwargs.put("vector_column", "vector");
 
 Set the writing mode for table (String)
 kwargs.put("mode", "overwrite"); // The values are *overwrite* or *append*.
 
-Indicate the model name or path (String); support huggingface models.
-kwargs.put("model_name_or_path", "/path/to/model");
+Indicate the length of your vector model.
+kwargs.put("vector_length", 256);
 
 Set schema (HashMap<String, String>) for the table:
 "key": "INT" -> meaning the filed "key" will get the datatype "INT"
