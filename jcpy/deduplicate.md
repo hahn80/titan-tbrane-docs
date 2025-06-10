@@ -96,6 +96,7 @@ public class DedupVectorsTest extends BaseTest {
                         k.put("vector_dims", 256);
                         k.put("max_k", 100);
                         k.put("threshold", 0.99);
+						k.put("keep_vectors", true); // or false;
                     })
                     .build()
             );
