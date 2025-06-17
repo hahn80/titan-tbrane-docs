@@ -34,10 +34,12 @@ public class VectorSearchTest extends BaseTest {
                     .action("arrow_search")
                     .kwargs(k -> {
                         k.put("input_arrow", inputArrow);
+                        k.put("output_arrow", outputArrow);
                         k.put("vector_name", "vectors");
                         k.put("query_point", queryPoint);
                         k.put("k", 10);
                         k.put("metric", "euclidean");
+                        k.put("keep_vectors", true);
                     })
                     .build()
             );
@@ -60,9 +62,11 @@ public class VectorSearchTest extends BaseTest {
 
 Giải thích tham số:
 
-- *input_arrow*: String (path to arrow file)
+- *input_arrow*: String (path to input arrow file)
+- *output_arrow*: String (path to output arrow file)
 - *vector_name*: String (name of vector column)
 - *query_point*: Float [], the array of query vector (float 32)
 - *k*: the number of vectors to collect from the search. If k=10, it means that we look for 10 nearest vector to *query_point*.
 - *metric*: type of distance to use for searching: There are 4 types: "euclidean", "manhattan", "cosine_similarity", "inner_product"
+- *keep_vectors*: Bool: keep vector column or not.
 
