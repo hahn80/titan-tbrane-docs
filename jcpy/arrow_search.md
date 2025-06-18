@@ -40,6 +40,7 @@ public class VectorSearchTest extends BaseTest {
                         k.put("k", 10);
                         k.put("metric", "euclidean");
                         k.put("keep_vectors", true);
+						k.put("min_score", 0.7);
                     })
                     .build()
             );
@@ -69,4 +70,5 @@ Giải thích tham số:
 - *k*: the number of vectors to collect from the search. If k=10, it means that we look for 10 nearest vector to *query_point*.
 - *metric*: type of distance to use for searching: There are 4 types: "euclidean", "manhattan", "cosine_similarity", "inner_product"
 - *keep_vectors*: Bool: keep vector column or not.
+- *min_score*: min_score to keep result.
 
