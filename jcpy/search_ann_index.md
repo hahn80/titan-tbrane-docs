@@ -47,6 +47,7 @@ public class AnnIndexSearchTest extends BaseTest {
                         k.put("index_folder", indexFolder);
                         k.put("query_vectors", queryVectors);
                         k.put("limit", 3);
+                        k.put("min_score", 0.7);
                     })
                     .build()
             );
